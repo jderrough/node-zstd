@@ -1,4 +1,8 @@
 # syntax=docker/dockerfile:1
-ARG VERSION=latest
-FROM node:${VERSION}
-RUN apt-get install zstd
+FROM ubuntu:latest
+ARG NODE_VERSION=current
+RUN apt-get update
+RUN apt-get install -y curl sudo zstd
+RUN curl -sL https://deb.nodesource.com/setup_$NODE_VERSION.x | sudo bash -
+RUN apt-get install -y nodejs
+RUN npm install -g yarn
